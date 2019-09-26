@@ -26,6 +26,8 @@ student-grading-utils/
 
 4. **tmp** = Temporary folder to store pull request in `.gz` format.
 
+5. **bin** = Contains executable scripts for grading.
+
 5. **final_1366x768** = Example image to compare downloaded `html css` submissions.
 
 
