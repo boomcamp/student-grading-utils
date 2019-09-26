@@ -28,7 +28,9 @@ student-grading-utils/
 
 5. **bin** = Contains executable scripts for grading.
 
-5. **final_1366x768** = Example image to compare downloaded `html css` submissions.
+6. **final_1366x768** = Example image to compare downloaded `html css` submissions.
+
+7. **screenshots** = Example grading display.
 
 
 ## Setup and Installation
