@@ -33,13 +33,13 @@ student-grading-utils/
 
 Setup description:
 
-1. /bin/.env = System variables example present working directory `/home/dev-mentor/Downloads/student-grading-utils/`.
+1. /bin/.env = Holds system variables, example present working directory `/home/dev-mentor/Downloads/student-grading-utils/`.
 
 Example: 
 
 ```
 export branch=submission
-repo=https://github.com/boomcamp/javascript-2-arrays
+export repo=https://github.com/boomcamp/javascript-2-arrays
 export BASH_SOURCE=/bin/bash
 
 export output_dir=/home/dev-mentor/Downloads/student-grading-utils/output_dir
