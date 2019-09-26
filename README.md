@@ -78,6 +78,9 @@ source ./env
 ```
 ./grade_htmls_css_final.sh
 ```
+Display :
+
+![alt text](/screenshots/grade-html-css.png)
 
 2. Grade javascript submissions
 
@@ -85,3 +88,6 @@ source ./env
 ./grade_jasmine_spec_repo.sh
 ```
 
+Display :
+
+![alt text](/screenshots/jasmine-report.png)
