@@ -36,19 +36,23 @@ const config = {
 
 async function downloadRepoArchives(outputDir, archConfigs) {
   archConfigs.forEach(async config => {
-    try {
-      const outputPath = path.resolve(
-        outputDir,
-        `${config.owner}_${config.repo}.tar.gz`
-      );
-      const repoArchive = await github.repos.getArchiveLink(config);
+    const outputPath = path.resolve(
+      outputDir,
+      `${config.owner}_${config.repo}.tar.gz`
+    );
+    try{
+     return repoArchive = await github.repos.getArchiveLink(config)
+    }catch(e){
+      console.error(`Repository of ${config.owner} cannot be found!`)
+    }finally{
+      if(typeof repoArchive !== 'undefined'){
       await writeFileAsync(outputPath, repoArchive.data);
-      console.log(outputPath);
-    } catch (e) {
-      throw e;
+      console.log(outputPath)
+      }
     }
-  });
+});
 }
+
 function parseRepoUrl(url) {
   const path = new URL(url).pathname.split('/');
   return {
