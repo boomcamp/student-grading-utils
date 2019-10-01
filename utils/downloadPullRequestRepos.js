@@ -49,7 +49,6 @@ async function downloadRepoArchives(outputDir, archConfigs) {
     }
   });
 }
-
 function parseRepoUrl(url) {
   const path = new URL(url).pathname.split('/');
   return {

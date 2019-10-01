@@ -1,37 +1,23 @@
-FROM ubuntu
+FROM node:11-alpine
 
-RUN apt-get update && apt-get install -yq libgconf-2-4
+RUN apk add --no-cache bash
+RUN apk add --no-cache curl 
 
-RUN apt-get -y install curl gnupg \
-    && apt-get install -y wget \
-    && rm -rf /var/lib/apt/lists/* \
-    && curl -sL https://deb.nodesource.com/setup_11.x  | bash - \
-    && apt-get -y install nodejs
+RUN apk add --update nodejs npm
 
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
-    && apt-get update \
-    && apt-get install -y google-chrome-unstable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf \
-      --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
-
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
+ENV CHROMIUM_PATH /usr/bin/chromium-browser
+RUN apk add --nocache udev ttf-freefont chromium git
 
 WORKDIR /student-grading-utils
 COPY . /student-grading-utils
 COPY package.json /student-grading-utils
-RUN npm install
-# RUN npm i --production
-
-RUN npm install puppeteer-core chrome-aws-lambda --save-prod
-RUN npm install puppeteer@1.11.0 --save-dev
-
+RUN npm install 
+RUN npm install --save puppeteer@1.11.0
 
 VOLUME /student-grading-utils
-
-
-ADD ${reference_image} .
+ADD $reference_image /student-grading-utils
 COPY /bin/$checker /bin/
 CMD chmod +x bin/$checker
 
-
-ENTRYPOINT ./bin/$checker
+ENTRYPOINT ./bin/$checker   

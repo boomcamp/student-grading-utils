@@ -103,7 +103,10 @@ function readdirAsync(path) {
 
   try {
     const referencePNG = await getPNG(referenceImage);
-    const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+    const browser = await puppeteer.launch({
+  executablePath: process.env.CHROMIUM_PATH, //this is important. execute the chromium
+  args: ['--no-sandbox', '--disable-setuid-sandbox'], // This was important. Can't remember why
+});
     students = await readdirAsync(dirs);
     for (let repoPath of students) {
         const diffPercentage = await getDiffPercentage(browser, referencePNG,path.join(dirs,repoPath));
