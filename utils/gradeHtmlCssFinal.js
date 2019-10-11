@@ -119,7 +119,7 @@ function readdirAsync(path) {
   await browser.close();
   var str = JSON.stringify(results, null, 2);
   console.log(str)
-   
+  
   } catch (e) {
     console.error(e);
     process.exitCode = 1;
