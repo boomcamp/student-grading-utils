@@ -47,6 +47,7 @@ errcho "Repos will be output to $output_dir"
   --output "$tmpdir" \
   --repo "$repo" \
   --branch "$branch" \
+  --studentList "$studentList" \
   | xargs -I{} tar -xf {} -C "$output_dir"
 
 ../utils/gradeHtmlCssFinal.js \

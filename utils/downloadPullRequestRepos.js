@@ -5,7 +5,6 @@ const fs = require('fs');
 const path = require('path');
 const github = require('@octokit/rest')();
 const { promisify } = require('util');
-
 const writeFileAsync = promisify(fs.writeFile);
 
 const argv = require('yargs')
@@ -32,6 +31,7 @@ const config = {
   outputDir: argv.output,
   repo: argv.repo,
   branch: argv.branch,
+  studentList: argv.studentList,
 };
 
 async function downloadRepoArchives(outputDir, archConfigs) {
@@ -78,6 +78,8 @@ function parseRepoUrl(url) {
       per_page: 100,
     });
 
+
+
     const prRepos = finalRepoPulls.data.map(pr => {
       return {
         owner: pr.user.login,
@@ -86,10 +88,20 @@ function parseRepoUrl(url) {
         ref: branch,
       };
     });
+    
+    let students = fs.readFileSync(config.studentList, {encoding: "utf8"}).toString().split('\n')
 
-    await downloadRepoArchives(outputDir, prRepos);
+    if(parseInt(students.length) > 0){
+      for(i = 0; i < students.length; i++){
+        var result = prRepos.filter( obj => obj.owner === students[i]);
+        await downloadRepoArchives(outputDir, result);
+        }
+    }else{
+      await downloadRepoArchives(outputDir, prRepos);
+    }
   } catch (e) {
     console.error(e);
     process.exitCode = 1;
   }
 })(config);
+
