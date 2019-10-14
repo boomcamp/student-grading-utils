@@ -32,6 +32,7 @@ function readdirAsync(path) {
   return new Promise(function (resolve, reject) {
     fs.readdir(path, function (error, result) {
       if (error) {
+        console.log('hello')
         reject(error);
       } else {
         resolve(result);

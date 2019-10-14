@@ -8,7 +8,7 @@
 # Example present working directory: /home/dev-mentor/Downloads/student-grading-utils/
 
 export branch=submission # export branch=submission
-export repo=https://github.com/boomcamp/html-css-final #repo=https://github.com/boomcamp/javascript-2-arrays
+export repo=https://github.com/boomcamp/javascript-1 #repo=https://github.com/boomcamp/javascript-2-arrays
 export BASH_SOURCE=/bin/bash
 
 # Folders
@@ -22,3 +22,4 @@ export reference_image=/home/webdev/Desktop/boomcamp/student-grading-utils/final
 export submissions=/output_dir/
 export execfile=./reset.sh
 export studentList=../student.txt
+export students=(EricA102 vincegludovice jovenbandagosa HamletDelosReyes markjowenamedes)
