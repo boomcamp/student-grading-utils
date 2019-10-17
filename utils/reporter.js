@@ -7,6 +7,7 @@ class Reporter{
         this.failedSuites = [];
         this.failedSpecs = [];
         this.pendingSpecs = [];
+        this.failureMessages = [];
       }
     
       jasmineStarted() {
@@ -23,6 +24,7 @@ class Reporter{
           passed,
           failed: this.failureCount,
           total: this.specCount,
+          failures : this.failureMessages
         };
       }
     
@@ -37,6 +39,12 @@ class Reporter{
         } else if (res.status === 'failed') {
           this.failureCount++;
           this.failedSpecs.push(res);
+            for(var i = 0; i < res.failedExpectations.length; i++) {
+              this.failureMessages.push({
+                kindMessage : res.failedExpectations[i].message,
+                stackTrace :  res.failedExpectations[i].stack
+              }) 
+            }        
           this.executableSpecCount++;
         }
       }
