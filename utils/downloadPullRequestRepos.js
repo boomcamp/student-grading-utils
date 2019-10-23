@@ -26,12 +26,20 @@ const argv = require('yargs')
     describe: 'The branch name that should be downloaded from the fork',
     demandOption: true,
     type: 'string',
+  })
+  .option('all_students', {
+    alias: 'a',
+    describe: 'The student count to be graded true=all, false=filter students thru students.txt',
+    demandOption: true,
+    type: 'boolean',
   }).argv;
 
 const config = {
   outputDir: argv.output,
   repo: argv.repo,
   branch: argv.branch,
+  studentFile: 'students.txt',
+  allStudents: argv.all_students
 };
 
 async function downloadRepoArchives(outputDir, archConfigs) {
@@ -63,8 +71,8 @@ function parseRepoUrl(url) {
 
 (async function({ repo, branch, outputDir }) {
   console.error(
-    'Downloaded repositories will be placed in: ',
-    path.resolve(outputDir)
+    `Downloaded repositories will be placed in:`,
+     path.resolve(outputDir)
   );
 
   try {
@@ -87,7 +95,20 @@ function parseRepoUrl(url) {
       };
     });
 
-    await downloadRepoArchives(outputDir, prRepos);
+    let records = fs.readFileSync(`${path.resolve("../", config.studentFile)}`, 'utf8'); 
+    let hasStudents = parseInt(records.length) ? true : false;
+    let studentsLength = parseInt(records.length);
+
+    if(hasStudents && !config.allStudents){
+      let students = records.toString().toLowerCase().split("\n");
+      for(i = 0; i < studentsLength; i++){
+        let result = prRepos.filter( obj => obj.owner.toLowerCase() === students[i]); 
+        await downloadRepoArchives(outputDir, result);
+      }
+    }else{
+      await downloadRepoArchives(outputDir, prRepos);
+    }
+
   } catch (e) {
     console.error(e);
     process.exitCode = 1;

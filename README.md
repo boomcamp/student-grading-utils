@@ -32,20 +32,21 @@ student-grading-utils/
 ├── Dockerfile1
 ├── final_1366x768.png
 ├── grade.env
+├── output_dir
 ├── package.json
 ├── package-lock.json
 ├── README.md
 ├── screenshots
 │   ├── grade-html-css.png
 │   └── jasmine-report.png
+├── students.txt
+├── tmp
 └── utils
     ├── downloadPullRequestRepos.js
     ├── gradeHtmlCssFinal.js
     ├── gradeJasmineSpecRepo.js
     ├── reporter.js
     └── worker.js
-
-3 directories, 18 files
 
 ```
 
@@ -62,7 +63,8 @@ Definitions:
 8.  execfile = variable to execute reset.sh to empty output_dir and tmp folders after grading.
 9.  screenshots = Example demonstrations.
 10. grade.env = Docker environment variables.
-10  Dockerfile,Dockerfile1 = Use to build docker image for student-grading-utils.
+11. students.txt = Holds student list for grading.
+12.  Dockerfile,Dockerfile1 = Use to build docker image for student-grading-utils.
 ```
   
 
@@ -70,7 +72,7 @@ Definitions:
 
 **Setup**:
 
-1. **/bin/.env** = Holds system variables for grading.
+1. **/bin/.env.sh** = Holds system variables for grading.
 
 Example contents:
 
@@ -78,6 +80,7 @@ Example contents:
 export branch=submission
 export repo=https://github.com/boomcamp/javascript-2-arrays
 export BASH_SOURCE=/bin/bash
+export all_students=true
 export output_dir=/home/dev-mentor/Downloads/student-grading-utils/output_dir
 export tmpdir=/home/dev-mentor/Downloads/student-grading-utils/tmp #/var/tmp
 export reference_image=/home/dev-mentor/Downloads/student-grading-utils/final_1366x768.png
@@ -85,8 +88,6 @@ export submissions=/output_dir/
 export execfile=/home/webdev/Desktop/student-grading-utils/bin/reset.sh
 
 ```
-
-  
 
 **Installation**:
 
@@ -134,6 +135,7 @@ cd bin && ./grade_jasmine_spec_repo.sh
 ```
 branch=submission
 repo=https://github.com/boomcamp/html-css-final
+all_students=true
 output_dir=/student-grading-utils/output_dir
 tmpdir=/student-grading-utils/tmp
 reference_image=/student-grading-utils/final_1366x768.png

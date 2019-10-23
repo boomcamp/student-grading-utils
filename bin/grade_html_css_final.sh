@@ -34,6 +34,11 @@ while [[ $# -gt 0 ]]
         shift
         shift
         ;;
+      -a|--all_students)
+        all_students=$2;
+        shift
+        shift
+        ;;
        --)
          shift; break;;
     esac
@@ -43,17 +48,19 @@ cd "${BASH_SOURCE%/*}" || exit
 
 errcho "Repos will be output to $output_dir"
 
-../utils/downloadPullRequestRepos.js \
-  --output "$tmpdir" \
-  --repo "$repo" \
-  --branch "$branch" \
-  | xargs -I{} tar -xf {} -C "$output_dir"
+# Download submissions
+ ../utils/downloadPullRequestRepos.js \
+   --output "$tmpdir" \
+   --repo "$repo" \
+   --branch "$branch" \
+   --all_students "$all_students" \
+   | xargs -I{} tar -xf {} -C "$output_dir"
 
+# Run html-css-final grader
 ../utils/gradeHtmlCssFinal.js \
   --directories "$output_dir" \
   --reference "$reference_image"
 
-# TODO: Empty folder command 
-
+# Empty folder
 Runreset="$execfile"
 ("$Runreset")

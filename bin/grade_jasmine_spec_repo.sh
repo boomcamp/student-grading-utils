@@ -29,6 +29,11 @@ while [[ $# -gt 0 ]]
         shift
         shift
         ;;
+      -a|--all_students)
+        all_students=$2;
+        shift
+        shift
+        ;;
        --)
          shift; break;;
     esac
@@ -43,6 +48,7 @@ errcho "Repos will be output to $output_dir"
    --output "$tmpdir" \
    --repo "$repo" \
    --branch "$branch" \
+   --all_students "$all_students" \
    | xargs -I{} tar -xf {} -C "$output_dir"
 
 # Run jasmine console reporter
@@ -50,7 +56,6 @@ errcho "Repos will be output to $output_dir"
   --directories "$output_dir" \
   --submissions "$submissions"
 
-# TODO: Empty folder command 
-
+# Empty folder
 Runreset="$execfile"
 ("$Runreset")
