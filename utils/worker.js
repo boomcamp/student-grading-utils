@@ -5,6 +5,7 @@
  */
 const path = require('path');
 const fs = require('fs');
+const process = require('process');
 
 const { parentPort, workerData } = require('worker_threads');
 const Reporter = require('./reporter.js'); //Require reporter class
@@ -37,14 +38,28 @@ function runTests(dir){
     jasmine.execute();
     
     jasmine.onComplete(status => {
-        const user = parseUser(workerData);
-        grades[user.email] = {
-            name: user.name,
-            results : reporter.results
+        try {
+            const user = parseUser(workerData);
+            if(typeof user === 'object'){
+                grades[user.email] = {
+                    name: user.name,
+                    results : reporter.results
+                }
+
+                //Determine properties if exist in objects
+                let hasProperties = (user.hasOwnProperty('name') && user.hasOwnProperty('email'));
+
+                if(hasProperties){
+                    console.log(JSON.stringify(grades, null, 2));
+                }else{
+                    console.error('\x1b[43m', user , '\x1b[0m' );
+                    process.exitCode = 1;
+                }
+            }
+        } catch (e) {
+            console.error('\x1b[43m', 'There is an invalid user.json during grading!', '\x1b[0m' );
+            process.exitCode = 1;
         }
-        //Display formatted results
-        var str = JSON.stringify(grades, null, 2);
-        console.log(str);
     }); 
 }
 
