@@ -43,13 +43,6 @@ cd "${BASH_SOURCE%/*}" || exit
 
 errcho "Repos will be output to $output_dir"
 
-# Download submissions
- ../utils/downloadPullRequestRepos.js \
-   --output "$tmpdir" \
-   --repo "$repo" \
-   --branch "$branch" \
-   --all_students "$all_students" \
-   | xargs -I{} tar -xf {} -C "$output_dir"
 
 # Run jasmine console reporter
 ../utils/gradeJasmineSpecRepo.js \
