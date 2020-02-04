@@ -1,0 +1,17 @@
+version: '3'
+services:
+   student-grading-utils:
+      env_file: 
+         - grade.env
+      build: ./
+      volumes: 
+         - ./:/app
+      
+
+
+
+
+
+   
+
+        
