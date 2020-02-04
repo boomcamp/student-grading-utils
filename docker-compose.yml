@@ -5,8 +5,8 @@ services:
          - grade.env
       build: ./
       volumes: 
-         - ./:/app
-      
+         - .:/student-grading-utils
+      tty: true
 
 
 

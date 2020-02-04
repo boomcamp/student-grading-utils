@@ -14,4 +14,4 @@ COPY . /student-grading-utils
 COPY package.json /student-grading-utils
 RUN npm install 
 RUN npm install --save puppeteer@1.11.0
- 
+

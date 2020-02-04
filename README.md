@@ -142,14 +142,32 @@ checker=grade_html_css_final.sh
 execfile=/student-grading-utils/bin/reset.sh
 
 ```
+
 2. Build student-grading-utils container.
 ```
-docker build -t student-grading-utils .
+docker-compose up .
 ```
-3. Run the grading utils with this docker command.
+3. Execute the docker container and interact with the CLI.
 ```
-docker run --env-file grade.env student-grading-utils
+docker container -it [docker container id/name] bash
 ```
+
+4. Now in the CLI, execute the commands needed.
+
+example:
+
+```
+./grade_html_css_final.sh
+```
+
+Note: When you update the ENVIRONMENT file grade.env, 
+you will to execute the following commands.
+```
+./grade.env
+source ./grade.env 
+```
+
+in the dockerfile CLI.
 
 ### Maintainers
 
