@@ -133,23 +133,59 @@ cd bin && ./grade_jasmine_spec_repo.sh
 
 ```
 branch=submission
+# repo=https://github.com/boomcamp/javascript-1
 repo=https://github.com/boomcamp/html-css-final
+reference_image=/student-grading-utils/final_1366x768.png
+
 output_dir=/student-grading-utils/output_dir
 tmpdir=/student-grading-utils/tmp
-reference_image=/student-grading-utils/final_1366x768.png
-submissions=/output_dir/
-checker=grade_html_css_final.sh
+submissions=/student-grading-utils/output_dir
+
 execfile=/student-grading-utils/bin/reset.sh
+studentList=/student-grading-utils/students.txt
+
 
 ```
+
 2. Build student-grading-utils container.
+
 ```
-docker build -t student-grading-utils .
+npm start
 ```
-3. Run the grading utils with this docker command.
+
+3. Execute the docker container and interact with the CLI.
 ```
-docker run --env-file grade.env student-grading-utils
+docker container -it [docker container id/name] bash
 ```
+
+4. Now in the CLI, execute the commands needed.
+
+example:
+
+```
+./grade_html_css_final.sh
+```
+
+5. Stop the container.
+```
+npm stop
+```
+**Notes**: 
++ When you update the ENVIRONMENT file grade.env, 
+you will to execute the following commands.
+```
+source ./grade.env 
+```
+in the dockerfile CLI.
+
++ To build: 
+```
+npm run build
+```
+
+
+
+
 
 ### Maintainers
 
