@@ -145,7 +145,9 @@ execfile=/student-grading-utils/bin/reset.sh
 
 2. Build student-grading-utils container.
 ```
-docker-compose up .
+docker-compose up . 
+or 
+npm start
 ```
 3. Execute the docker container and interact with the CLI.
 ```
