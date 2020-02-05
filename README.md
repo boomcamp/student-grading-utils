@@ -144,9 +144,12 @@ execfile=/student-grading-utils/bin/reset.sh
 ```
 
 2. Build student-grading-utils container.
+
 ```
 docker-compose up .
 ```
+or simply `npm start`
+
 3. Execute the docker container and interact with the CLI.
 ```
 docker container -it [docker container id/name] bash
@@ -163,8 +166,12 @@ example:
 Note: When you update the ENVIRONMENT file grade.env, 
 you will to execute the following commands.
 ```
-./grade.env
 source ./grade.env 
+```
+
+To rebuild: 
+```
+docker-compose build
 ```
 
 in the dockerfile CLI.
