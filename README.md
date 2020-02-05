@@ -161,9 +161,8 @@ example:
 ```
 
 Note: When you update the ENVIRONMENT file grade.env, 
-you will to execute the following commands.
+you will need to reload the variables.
 ```
-./grade.env
 source ./grade.env 
 ```
 
