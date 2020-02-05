@@ -22,4 +22,3 @@ export reference_image=/home/webdev/Desktop/boomcamp/student-grading-utils/final
 export submissions=/output_dir/
 export execfile=./reset.sh
 export studentList=../student.txt
-export students=(EricA102 vincegludovice jovenbandagosa HamletDelosReyes markjowenamedes)

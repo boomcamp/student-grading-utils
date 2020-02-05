@@ -46,7 +46,7 @@ while [[ $# -gt 0 ]]
     esac
   done
 
-echo ${studentsp[@]} > student.txt
+# echo ${studentsp[@]} > student.txt
 
 cd "${BASH_SOURCE%/*}" || exit
 

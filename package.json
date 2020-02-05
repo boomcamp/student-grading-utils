@@ -4,7 +4,9 @@
   "description": "A node script to automatically grade the html-css-final",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "docker-compose up",
+    "start-bg":"docker-compose up -d"
   },
   "repository": {
     "type": "git",
