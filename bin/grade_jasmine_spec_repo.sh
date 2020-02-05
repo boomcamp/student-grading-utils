@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+[ ! -d "$output_dir" ] && mkdir -p "$output_dir"
+[ ! -d "$tmpdir" ] && mkdir -p "$tmpdir"
+
 set -euo pipefail
 
 errcho() {
@@ -48,3 +51,6 @@ errcho "Repos will be output to $output_dir"
   --submissions "$submissions"
 
 # TODO: Empty folder command 
+
+Runreset="$execfile"
+("$Runreset")
