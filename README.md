@@ -133,22 +133,25 @@ cd bin && ./grade_jasmine_spec_repo.sh
 
 ```
 branch=submission
+# repo=https://github.com/boomcamp/javascript-1
 repo=https://github.com/boomcamp/html-css-final
+reference_image=/student-grading-utils/final_1366x768.png
+
 output_dir=/student-grading-utils/output_dir
 tmpdir=/student-grading-utils/tmp
-reference_image=/student-grading-utils/final_1366x768.png
-submissions=/output_dir/
-checker=grade_html_css_final.sh
+submissions=/student-grading-utils/output_dir
+
 execfile=/student-grading-utils/bin/reset.sh
+studentList=/student-grading-utils/students.txt
+
 
 ```
 
 2. Build student-grading-utils container.
 
 ```
-docker-compose up .
+npm start
 ```
-or simply `npm start`
 
 3. Execute the docker container and interact with the CLI.
 ```
@@ -163,18 +166,26 @@ example:
 ./grade_html_css_final.sh
 ```
 
-Note: When you update the ENVIRONMENT file grade.env, 
+5. Stop the container.
+```
+npm stop
+```
+**Notes**: 
++ When you update the ENVIRONMENT file grade.env, 
 you will to execute the following commands.
 ```
 source ./grade.env 
 ```
-
-To rebuild: 
-```
-docker-compose build
-```
-
 in the dockerfile CLI.
+
++ To build: 
+```
+npm run build
+```
+
+
+
+
 
 ### Maintainers
 
